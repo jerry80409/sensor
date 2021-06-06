@@ -2,6 +2,7 @@ package com.jerry80409;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 
 class SensorTest {
@@ -45,4 +46,16 @@ class SensorTest {
         assertEquals(140, temp);
     }
 
+    /**
+     * test -40 ~ 140
+     */
+    @Test
+    void test_all() {
+        IntStream.range(-40, 140)
+            .forEach(temp -> {
+                byte act = Sensor.enocde(true , temp);
+                int t = Sensor.decode(act);
+                assertEquals(temp, t);
+            });
+    }
 }
